@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет - Таджикистан</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Экран ввода номера телефона -->
+        <div id="phoneScreen" class="screen active">
+            <div class="screen-content">
+                <div class="header">
+                    <div class="flag-icon">🇹🇯</div>
+                    <h1>Личный кабинет</h1>
+                    <p class="subtitle">Республика Таджикистан</p>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="phoneInput" class="form-label">Номер телефона</label>
+                        <div class="phone-input-container">
+                            <select id="countrySelect" class="country-select">
+                                <option value="+7">+7</option>
+                                <option value="+43">+43</option>
+                                <option value="+998">+998</option>
+                                <option value="+992" selected>+992</option>
+                            </select>
+                            <input 
+                                type="tel" 
+                                id="phoneInput" 
+                                class="form-control phone-input" 
+                                placeholder="901234567"
+                                maxlength="20"
+                            >
+                        </div>
+                        <div class="input-help">Введите номер без кода страны</div>
+                    </div>
+                    
+                    <button id="phoneSubmitBtn" class="btn btn--primary btn--full-width" disabled>
+                        Проверить номер
+                    </button>
+                </div>
+                
+                <div id="phoneError" class="error-message hidden"></div>
+            </div>
+        </div>
+
+        <!-- Экран регистрации -->
+        <div id="registrationScreen" class="screen">
+            <div class="screen-content">
+                <div class="header">
+                    <button id="backFromRegistration" class="back-btn">← Назад</button>
+                    <h2>Регистрация</h2>
+                    <p class="subtitle">Новый пользователь</p>
+                </div>
+                
+                <div class="form-section">
+                    <div class="phone-display">
+                        <span>Номер: </span><span id="regPhoneDisplay"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="nameInput" class="form-label">Ваше имя</label>
+                        <input 
+                            type="text" 
+                            id="nameInput" 
+                            class="form-control" 
+                            placeholder="Введите ваше имя"
+                            maxlength="50"
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="smsCodeReg" class="form-label">Код из SMS</label>
+                        <input 
+                            type="text" 
+                            id="smsCodeReg" 
+                            class="form-control sms-input" 
+                            placeholder="123456"
+                            maxlength="6"
+                            inputmode="numeric"
+                        >
+                    </div>
+                    
+                    <button id="sendCodeRegBtn" class="btn btn--secondary btn--full-width mb-12">Отправить код SMS</button>
+                    <button id="registerBtn" class="btn btn--primary btn--full-width" disabled>Зарегистрироваться</button>
+                </div>
+                
+                <div id="regError" class="error-message hidden"></div>
+                <div id="regSmsStatus" class="sms-status hidden"></div>
+            </div>
+        </div>
+
+        <!-- Экран входа -->
+        <div id="loginScreen" class="screen">
+            <div class="screen-content">
+                <div class="header">
+                    <button id="backFromLogin" class="back-btn">← Назад</button>
+                    <h2>Вход в систему</h2>
+                    <p id="loginUserInfo" class="subtitle">Добро пожаловать обратно!</p>
+                </div>
+                
+                <div class="form-section">
+                    <div class="phone-display">
+                        <span>Номер: </span><span id="loginPhoneDisplay"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="smsCodeLogin" class="form-label">Код из SMS</label>
+                        <input 
+                            type="text" 
+                            id="smsCodeLogin" 
+                            class="form-control sms-input" 
+                            placeholder="123456"
+                            maxlength="6"
+                            inputmode="numeric"
+                        >
+                    </div>
+                    
+                    <button id="sendCodeLoginBtn" class="btn btn--secondary btn--full-width mb-12">Отправить код SMS</button>
+                    <button id="loginBtn" class="btn btn--primary btn--full-width" disabled>Войти</button>
+                </div>
+                
+                <div id="loginError" class="error-message hidden"></div>
+                <div id="loginSmsStatus" class="sms-status hidden"></div>
+            </div>
+        </div>
+
+        <!-- Личный кабинет -->
+        <div id="cabinetScreen" class="screen">
+            <div class="screen-content">
+                <div class="header">
+                    <h2>Личный кабинет</h2>
+                    <button id="logoutBtn" class="btn btn--secondary btn--sm">Выйти</button>
+                </div>
+                
+                <div class="cabinet-content">
+                    <div class="user-info">
+                        <div class="info-item">
+                            <span class="info-label">Имя:</span>
+                            <span id="userName" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Телефон:</span>
+                            <span id="userPhone" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">EAN-13 код:</span>
+                            <span id="ean13Code" class="info-value ean-code"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Регистрация:</span>
+                            <span id="regDate" class="info-value"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Последний вход:</span>
+                            <span id="lastLogin" class="info-value"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="barcode-section">
+                        <h3>Штрих-код EAN-13</h3>
+                        <canvas id="barcodeCanvas" width="300" height="100"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
